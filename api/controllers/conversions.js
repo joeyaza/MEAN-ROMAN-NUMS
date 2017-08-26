@@ -2,6 +2,7 @@ var Conversion = require('../models/Conversion');
 
 // GET
 function getAll(request, response) {
+    console.log('here')
   Conversion.find(function(error, conversions) {
     if(error) response.status(404).send(error);
 
@@ -11,8 +12,9 @@ function getAll(request, response) {
 
 // POST
 function createConversion(request, response) {
+   console.log(request);
   var conversion = new Conversion(request.body);
-
+  console.log(conversion)
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
 
@@ -23,7 +25,6 @@ function createConversion(request, response) {
 // GET
 function getConversion(request, response) {
   var id = request.params.id;
-
   Conversion.findById({_id: id}, function(error, conversion) {
     if(error) response.status(404).send(error);
 

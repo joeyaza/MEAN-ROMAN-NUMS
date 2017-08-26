@@ -3,8 +3,8 @@ var conversion = require('./Conversion');
 
 
 var ConversionSchema = mongoose.Schema({
-  roman: String,
-  arabic: Number
+  from: String,
+  to: String
 });
 
 module.exports = mongoose.model('Conversion', ConversionSchema);
