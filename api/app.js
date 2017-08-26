@@ -18,10 +18,9 @@ app.use(cors({
   origin: 'http://localhost:4000',
   credentials: true
 }));
-
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
+console.log('here')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(routes);

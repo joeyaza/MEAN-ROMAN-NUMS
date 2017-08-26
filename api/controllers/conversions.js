@@ -1,8 +1,7 @@
-var Conversion = require('../models/Conversion');
-
+let Conversion = require('../models/Conversion');
+let romanNumeralConverter = require('roman-numeral-converter-mmxvi')
 // GET
 function getAll(request, response) {
-    console.log('here')
   Conversion.find(function(error, conversions) {
     if(error) response.status(404).send(error);
 
@@ -12,12 +11,18 @@ function getAll(request, response) {
 
 // POST
 function createConversion(request, response) {
-   console.log(request);
-  var conversion = new Conversion(request.body);
-  console.log(conversion)
+  // var conversion = new Conversion(request.body);
+  console.log(request.body)
+  // if(Number(a)) {
+  //   var a = romanNumeralConverter.getRomanFromInteger(cont);
+  // } else {
+  //   var a = romanNumeralConverter.getIntegerFromRoman(cont);
+  // }
+  var conversion = new Conversion({"from": "V",
+    "to": '10'});
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
-
+  console.log(conversion)
     response.status(201).send(conversion);
   });
 }
@@ -25,6 +30,7 @@ function createConversion(request, response) {
 // GET
 function getConversion(request, response) {
   var id = request.params.id;
+
   Conversion.findById({_id: id}, function(error, conversion) {
     if(error) response.status(404).send(error);
 

@@ -15,16 +15,14 @@ app.controller('Main', ['$scope', '$http', function ($scope, $http) {
 	});
 
 	$scope.submit = function() {
-		conversionData = $scope.to;
-    	if ($scope.to) {   
+		conversionData = $scope.from;
+    	if ($scope.from) {   
     		console.log(conversionData);
     	   $http({
 		        url: 'http://localhost:3001/conversions',
 		        method: "POST",
-		        headers : {
-           		    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-           		},
-		        data: conversionData
+				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+		        data: {"from":conversionData}
 		    })
 		    .then(function(response) {
 		            console.log(response);

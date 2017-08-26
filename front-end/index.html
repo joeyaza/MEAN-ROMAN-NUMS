@@ -8,15 +8,15 @@
 <body ng-app="app" ng-controller="Main">
 
 <form ng-submit="submit()" method="POST">
-	<input ng-model="to" type="text" name="to" placeholder="CONVERT" required>
+	<input ng-model="from" type="text" name="from" placeholder="CONVERT" required>
 	<input type="submit" value="Send">
 <!-- 	<p>{{user.confirmation}}</p> -->
 </form>
 
 
 <div ng-repeat="conversion in all">
-<p>{{conversion.roman}}
-{{conversion.arabic}}</p>
+<p>{{conversion.from}}
+{{conversion.to}}</p>
 </div>
 </body>
 </html>
