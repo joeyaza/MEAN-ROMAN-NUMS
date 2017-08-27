@@ -19,6 +19,8 @@ function createConversion(request, response) {
     var converted = romanNumeralConverter.getIntegerFromRoman(conversion.from);
   }
   conversion.to = converted;
+  conversion.time = new Date(parseInt(conversion._id.toString().substring(0, 8), 16) * 1000);
+  console.log(conversion.time)
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
     response.status(201).send(conversion);

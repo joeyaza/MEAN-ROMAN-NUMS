@@ -10,7 +10,7 @@ app.controller('Main', ['$scope', '$http', function ($scope, $http) {
 		for(i=0;i<res.length;i++) {
 			timeId.push(new Date(parseInt(res[i]._id.substring(0, 8), 16) * 1000));
 		}
-		console.log(timeId);
+		console.log($scope.all);
 	});
 
 	$scope.submit = function() {
