@@ -11,30 +11,25 @@ function getAll(request, response) {
 
 // POST
 function createConversion(request, response) {
-  // var conversion = new Conversion(request.body);
-  console.log(request.body)
-  // if(Number(a)) {
-  //   var a = romanNumeralConverter.getRomanFromInteger(cont);
-  // } else {
-  //   var a = romanNumeralConverter.getIntegerFromRoman(cont);
-  // }
-  var conversion = new Conversion({"from": "V",
-    "to": '10'});
+  var conversion = new Conversion(request.body);
+  if(Number(conversion.from)) {
+    var converted = romanNumeralConverter.getRomanFromInteger(conversion.from);
+  } else {
+    var converted = romanNumeralConverter.getIntegerFromRoman(conversion.from);
+  }
+  conversion.to = converted;
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
-  console.log(conversion)
     response.status(201).send(conversion);
+    getConversion(conversion._id)
   });
 }
 
-// GET
-function getConversion(request, response) {
-  var id = request.params.id;
-
-  Conversion.findById({_id: id}, function(error, conversion) {
-    if(error) response.status(404).send(error);
-
-    response.status(200).send(conversion);
+// GET ONE
+function getConversion(id) {
+  console.log(id)
+  Conversion.findById({_id: id}, function(conversion) {
+    console.log(conversion)
   }).select('-__v');
 }
 

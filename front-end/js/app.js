@@ -14,22 +14,29 @@ app.controller('Main', ['$scope', '$http', function ($scope, $http) {
 		}
 	});
 
-	$scope.submit = function() {
-		conversionData = $scope.from;
-    	if ($scope.from) {   
-    		console.log(conversionData);
-    	   $http({
-		        url: 'http://localhost:3001/conversions',
-		        method: "POST",
-				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-		        data: {"from":conversionData}
-		    })
-		    .then(function(response) {
-		            console.log(response);
-		    })
+// 	$scope.submit = function() {
+// 		conversionData = $scope.from;
+//     	if ($scope.from) {   
+//     		console.log(conversionData);
+//     	   $http({
+// 		        url: 'http://localhost:3001/conversions',
+// 		        method: "POST",
+// 				headers: {'Content-Type': 'application/json; charset=UTF-8' },
+// 		        data: {"from":conversionData}
+// 		    })
+// 		    .then(function(response) {
+// 		            console.log(response);
+// 		    })
 
+//     }
+// }
+$scope.submit = function() {
+	conversionData = $scope.from
+$http.post("http://localhost:3001/conversions", {from:conversionData}, {headers: {'Content-Type': 'application/json'} })
+        .then(function (response) {
+            console.log(response)
+        });
     }
-}
 
   //     var data = {
   //       "conversion" : $scope.to
