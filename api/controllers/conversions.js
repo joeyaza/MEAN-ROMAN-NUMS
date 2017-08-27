@@ -11,17 +11,17 @@ function getAll(request, response) {
 
 // POST
 function createConversion(request, response) {
-  var conversion = new Conversion(request.body);
+  let conversion = new Conversion(request.body);
   if(Number(conversion.from)) {
     var converted = romanNumeralConverter.getRomanFromInteger(conversion.from);
   } else {
+    conversion.from = conversion.from.toUpperCase();
     var converted = romanNumeralConverter.getIntegerFromRoman(conversion.from);
   }
   conversion.to = converted;
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
     response.status(201).send(conversion);
-    getConversion(conversion._id)
   });
 }
 
