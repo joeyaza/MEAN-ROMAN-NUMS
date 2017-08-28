@@ -5,14 +5,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
 const cors = require('cors');
-// mongoose.connect('mongodb://localhost/mean-roman');
 const mongoUri = 'mongodb://localhost/mean-roman';
 mongoose.connect(mongoUri);
 const db = mongoose.connection;
 db.on('error', function () {
   throw new Error('unable to connect to database at ' + mongoUri);
 });
-const routes   = require('./config/routes');
+const routes   = require('./routes/routes');
 const app = express();
 app.use(cors({
   origin: 'http://localhost:4000',
