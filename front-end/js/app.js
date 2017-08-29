@@ -8,19 +8,19 @@ app.controller('Main', ['$scope', '$http', function ($scope, $http) {
 	});
 
 	$scope.submit = function() {
-		if(!/^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/i.test($scope.from)) {
-			$scope.error = 'Please enter a valid roman numeral!';
-			$scope.answer = '';
-		} else if (!/^\d+$/i.test($scope.from)) {
-			$scope.error = 'Please enter a valid number!';
-			$scope.answer = '';
-		} else {
+		// if(/^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/i.test($scope.from)) {
+		// 	$scope.error = 'Please enter a valid roman numeral!';
+		// 	$scope.answer = '';
+		// } else if (!/^\d+$/i.test($scope.from)) {
+		// 	$scope.error = 'Please enter a valid number!';
+		// 	$scope.answer = '';
+		// } else {
 			$scope.error = '';
 			conversionData = $scope.from;
 			$http.post("http://localhost:3001/conversions", {from:conversionData}, {headers: {'Content-Type': 'application/json'} })
 		        .then(function (response) {
 		            $scope.answer = response.data.to;
 		    });
-		}
+		// }
 	};
 }]);
