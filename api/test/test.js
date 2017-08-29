@@ -9,7 +9,6 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-
 describe('/GET Conversions', () => {
   it('it should GET all the conversions', (done) => {
         chai.request(server)

@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 
-
-
 var ConversionSchema = mongoose.Schema({
   from: String,
   to: String,
