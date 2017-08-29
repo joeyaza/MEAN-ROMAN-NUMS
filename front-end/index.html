@@ -4,19 +4,38 @@
 	<title>MEAN ROMAN NUMERALS</title>
 	<script type="text/javascript" src="./js/angular/angular.js"></script>
 	<script type="text/javascript" src="./js/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="./styles/style.css">
 </head>
 <body ng-app="app" ng-controller="Main">
+<h1>ROMAN NUMERALS KATA</h1>
+<p>Hello, hello and welcome to Mean-Roman, a roman numeral converter built using the MEAN stack</p>
+<p>Please enter a valid Roman numeral (I, V, X,	L, C, D and M) or a number to convert</p>
+<div class='converter'>
+	<form ng-submit="submit()" method="POST">
+		<p class="error">{{error}}</p>
+		<input ng-model="from" type="text" name="from" placeholder="CONVERT" required>
+		<input type="submit" value="Convert">
+		<h3>ANSWER <span>{{answer}}</span></h3>
+	</form>
+</div>
 
-<form ng-submit="submit()" method="POST">
-	<input ng-model="from" type="text" name="from" placeholder="CONVERT" required>
-	<input type="submit" value="Send">
-	<h1>{{answer}}</h1>
-</form>
+<h3>RECENT CONVERSIONS</h3>
+<table>
+  <tr>
+    <th>From</th>
+    <th>To</th> 
+    <th>Date</th>
+  </tr>
+  <tr ng-repeat="conversion in all | orderBy:'time':true">
+    <td>{{conversion.from}}</td>
+    <td>{{conversion.to}}</td> 
+    <td>{{conversion.time}}</td>
+  </tr>
+</table>
 
-
-<div ng-repeat="conversion in all">
+<!-- <div ng-repeat="conversion in all">
 <p>{{conversion.from}}
 {{conversion.to}}, {{conversion.time}}</p>
-</div>
+</div> -->
 </body>
 </html>

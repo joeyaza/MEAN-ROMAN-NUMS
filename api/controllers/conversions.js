@@ -15,6 +15,7 @@ function createConversion(request, response) {
   let conversion = new Conversion(request.body);
   if(Number(conversion.from)) {
     (function(num) {
+      roman = '';
       for ( i in lookup ) {
         while ( num >= lookup[i] ) {
           roman += i;
@@ -26,7 +27,7 @@ function createConversion(request, response) {
   } else {
   conversion.from = conversion.from.toUpperCase();    
   (function(roman){
-    console.log(roman)
+    console.log('in')
           arabic = 0,
           i = roman.length;
       while (i--) {
@@ -36,6 +37,7 @@ function createConversion(request, response) {
           arabic += lookup[roman[i]];
       }
       converted = arabic;
+      arabic = 0;
     })(conversion.from)
   }
   conversion.to = converted;
