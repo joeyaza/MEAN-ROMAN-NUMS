@@ -21,26 +21,22 @@ describe('/GET Conversions', () => {
   });
 });
 
-
-let conversions = {
-    'X': '10',
-    'MIII':  '1003',
-    'MMMMLVI': '4056',
-    'IV': '4',
-    'CDXXIII': '423'
-}
-for (var prop in conversions) {
-    describe('/POST conversion', () => {
-    it('it should POST a conversion and do the correct conversion from Roman Numeral to Number ', (done) => {
+describe('/POST conversion', () => {
+  it('it should POST a conversion and do the correct conversion from Roman Numeral to Number ', (done) => {
+  let conversions = [
+    {from: "x", answer: '10'}, {from: "MIII", answer: '1003'}, {from: "MMMMLVI", answer: '4056'}, {from: "IV", answer: '4'},
+    {from: "CDXXIII", answer: '423'}
+  ]
+  for (let i=0;i<conversions.length;i++) {
           chai.request(server)
           .post('/conversions')
-          .send(conversions[prop])
+          .send(conversions[i])
           .end((err, res) => {
               res.should.have.status(201);
               res.body.should.be.a('object');
-              res.body.should.have.property('to').eql(prop);
-            done();
-          });
-    });
+              res.body.should.have.property('to').eql(conversions[i].anwser);
+        });
+    };
+    done();
   });
-}
+});
