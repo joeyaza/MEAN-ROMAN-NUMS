@@ -26,7 +26,7 @@
     <th>To</th> 
     <th>Date</th>
   </tr>
-  <tr ng-repeat="conversion in all | orderBy:'time':true">
+  <tr ng-repeat="conversion in all.data | orderBy:'time':true">
     <td>{{conversion.from}}</td>
     <td>{{conversion.to}}</td> 
     <td>{{conversion.time}}</td>
