@@ -9,13 +9,14 @@
 <body ng-app="app" ng-controller="Main">
 <h1>ROMAN NUMERALS KATA</h1>
 <p>Hello, hello and welcome to Mean-Roman, a roman numeral converter built using the MEAN stack</p>
-<p>Please enter a valid Roman numeral (I, V, X,	L, C, D and M) or a number to convert</p>
+<p>Please enter a valid Roman numeral or a number to convert</p>
 <div class='converter'>
 	<form ng-submit="submit()" method="POST">
 		<p class="error">{{error}}</p>
-		<input ng-model="from" type="text" name="from" placeholder="CONVERT" required>
+		<input ng-model="from" type="text" name="from" placeholder="CONVERT ME" required>
 		<input type="submit" value="Convert">
-		<h3>ANSWER <span>{{answer}}</span></h3>
+		<h3>ANSWER</h3>
+		<h2>{{answer}}</h2>
 	</form>
 </div>
 

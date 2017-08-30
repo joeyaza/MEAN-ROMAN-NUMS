@@ -2,16 +2,48 @@ body {
 width: 100%;
 text-align: center;
 font-family: arial;
+background: #F8F8F8;
 }
 
 .converter {
-	border: 1px black solid;
+	border-radius: 15px;
 	width : 600px;
 	margin: 0 auto;
 	padding: 30px;
+	background: white;
+	color: #383838;
+	h3 {
+		padding-top: 20px;
+	}
+	form {
+		input {
+		    background: white;
+		    padding: 10px 15px;
+		    border: black 1px solid;
+		    border-radius: 10px;
+		}
+		input[type="text"] {
+			margin-right: 20px;
+    		width: 200px;
+		}
+		.error {
+		    padding: 15px;
+		    border-radius: 15px;
+		    text-decoration: bold;
+		    color: red;
+		    text-transform: uppercase;
+		}
+	}
 }
 
+
 table {
-		width : 600px;
-	margin: 0 auto;
+    width: 650px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    th {
+    	text-decoration: underline;
+    }
 }

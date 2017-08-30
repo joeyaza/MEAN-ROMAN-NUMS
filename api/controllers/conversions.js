@@ -5,7 +5,6 @@ let lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV
 function getAll(request, response) {
   Conversion.find(function(error, conversions) {
     if(error) response.status(404).send(error);
-
     response.status(200).send(conversions);
   }).select('-__v');
 }
@@ -14,31 +13,26 @@ function getAll(request, response) {
 function createConversion(request, response) {
   let conversion = new Conversion(request.body);
   if(Number(conversion.from)) {
-    (function(num) {
-      roman = '';
-      for ( i in lookup ) {
-        while ( num >= lookup[i] ) {
-          roman += i;
-          num -= lookup[i];
-        }
+    roman = '';
+    for ( i in lookup ) {
+      while ( conversion.from >= lookup[i] ) {
+        roman += i;
+        conversion.from -= lookup[i];
       }
-      converted = roman;
-    })(conversion.from)
+    }
+    converted = roman;
   } else {
-  conversion.from = conversion.from.toUpperCase();    
-  (function(roman){
-    console.log('in')
-          arabic = 0,
-          i = roman.length;
-      while (i--) {
-        if ( lookup[roman[i]] < lookup[roman[i+1]] )
-          arabic -= lookup[roman[i]];
-        else
-          arabic += lookup[roman[i]];
-      }
-      converted = arabic;
-      arabic = 0;
-    })(conversion.from)
+    conversion.from = conversion.from.toUpperCase();    
+    arabic = 0,
+    i = conversion.from.length;
+    while (i--) {
+      if ( lookup[conversion.from[i]] < lookup[conversion.from[i+1]] )
+        arabic -= lookup[conversion.from[i]];
+      else
+        arabic += lookup[conversion.from[i]];
+    }
+    converted = arabic;
+    arabic = 0;
   }
   conversion.to = converted;
   conversion.time = new Date(parseInt(conversion._id.toString().substring(0, 8), 16) * 1000);
