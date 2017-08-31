@@ -9,31 +9,42 @@ function getAll(request, response) {
   }).select('-__v');
 }
 
-// POST
-function createConversion(request, response) {
-  let conversion = new Conversion(request.body);
-  if(Number(conversion.from)) {
-    roman = '';
-    for ( i in lookup ) {
-      while ( conversion.from >= lookup[i] ) {
-        roman += i;
-        conversion.from -= lookup[i];
-      }
+function arabicRoman(conversion) {
+  roman = '';
+  for ( i in lookup ) {
+    while ( conversion.from >= lookup[i] ) {
+       roman += i;
+      conversion.from -= lookup[i];
     }
-    converted = roman;
-  } else {
-    conversion.from = conversion.from.toUpperCase();    
-    arabic = 0,
-    i = conversion.from.length;
-    while (i--) {
+  }
+  converted = roman;
+  return converted;
+}
+
+function romanArabic(conversion) {
+  conversion.from = conversion.from.toUpperCase();    
+  arabic = 0,
+  i = conversion.from.length;
+  while (i--) {
       if ( lookup[conversion.from[i]] < lookup[conversion.from[i+1]] )
         arabic -= lookup[conversion.from[i]];
       else
         arabic += lookup[conversion.from[i]];
-    }
-    converted = arabic;
-    arabic = 0;
   }
+  converted = arabic;
+  arabic = 0;
+  return converted;
+}
+
+
+// POST
+function createConversion(request, response) {
+  let conversion = new Conversion(request.body);
+  if(Number(conversion.from)) {
+    arabicRoman(conversion);
+  } else {
+    romanArabic(conversion)
+}
   conversion.to = converted;
   conversion.time = new Date(parseInt(conversion._id.toString().substring(0, 8), 16) * 1000);
   conversion.save(function(error) {
@@ -44,5 +55,7 @@ function createConversion(request, response) {
 
 module.exports = {
   getAll: getAll,
-  createConversion: createConversion
+  createConversion: createConversion,
+  romanArabic: romanArabic,
+  arabicRoman: arabicRoman
 }

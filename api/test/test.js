@@ -3,8 +3,10 @@ process.env.NODE_ENV = 'test';
 let mongoose = require("mongoose");
 let Conversion = require('../controllers/conversions');
 let chai = require('chai');
+let expect = chai.expect;
 let chaiHttp = require('chai-http');
 let server = require('../app');
+let conversionsController = require('../controllers/conversions');
 let should = chai.should();
 
 chai.use(chaiHttp);
@@ -23,20 +25,26 @@ describe('/GET Conversions', () => {
 
 describe('/POST conversion', () => {
   it('it should POST a conversion and do the correct conversion from Roman Numeral to Number ', (done) => {
-  let conversions = [
-    {from: "x", answer: '10'}, {from: "MIII", answer: '1003'}, {from: "MMMMLVI", answer: '4056'}, {from: "IV", answer: '4'},
-    {from: "CDXXIII", answer: '423'}
-  ]
-  for (let i=0;i<conversions.length;i++) {
-          chai.request(server)
-          .post('/conversions')
-          .send(conversions[i])
-          .end((err, res) => {
-              res.should.have.status(201);
-              res.body.should.be.a('object');
-              res.body.should.have.property('to').eql(conversions[i].anwser);
+    let conversion = {
+        from: "x"
+    }
+        chai.request(server)
+        .post('/conversions')
+        .send(conversion)
+        .end((err, res) => {
+            res.should.have.status(201);
+            res.body.should.be.a('object');
+            res.body.should.have.property('to').eql('10');
+          done();
         });
-    };
-    done();
   });
+});
+console.log(conversionsController)
+
+
+it('Conversion should return correct answer', function() {
+  conversion = {
+    from: 'M'
+  }
+  expect(conversionsController.romanArabic(conversion)).to.equal(1000);
 });
