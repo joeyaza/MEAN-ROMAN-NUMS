@@ -8,18 +8,17 @@ let chaiHttp = require('chai-http');
 let server = require('../app');
 let conversionsController = require('../controllers/conversions');
 let should = chai.should();
-
 chai.use(chaiHttp);
 
 describe('/GET Conversions', () => {
   it('it should GET all the conversions', (done) => {
-        chai.request(server)
-        .get('/conversions')
-        .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-          done();
-        });
+      chai.request(server)
+      .get('/conversions')
+      .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+        done();
+      });
   });
 });
 
@@ -28,23 +27,42 @@ describe('/POST conversion', () => {
     let conversion = {
         from: "x"
     }
-        chai.request(server)
-        .post('/conversions')
-        .send(conversion)
-        .end((err, res) => {
-            res.should.have.status(201);
-            res.body.should.be.a('object');
-            res.body.should.have.property('to').eql('10');
-          done();
-        });
+      chai.request(server)
+      .post('/conversions')
+      .send(conversion)
+      .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('to').eql('10');
+        done();
+      });
   });
 });
-console.log(conversionsController)
 
-
-it('Conversion should return correct answer', function() {
-  conversion = {
-    from: 'M'
+it('Conversion should return correct Arabic Number for Roman Numeral', function() {
+  conversion = [
+    {from: 'v', answer: 5},
+    {from: 'mv', answer: 1005},
+    {from: 'mmx', answer: 2010},
+    {from: 'xc', answer: 90}
+  ]
+  for (i=0;i<conversion.length;i++) {
+    expect(conversionsController.romanArabic(conversion[i])).to.equal(conversion[i].answer);
   }
-  expect(conversionsController.romanArabic(conversion)).to.equal(1000);
 });
+
+it('Conversion should return correct Roman Numeral for Arabic Number', function() {
+  conversion = [
+    {from: 1000, answer: 'M'},
+    {from: 10, answer: 'X'},
+    {from: 1010, answer: 'MX'},
+    {from: 100, answer: 'C'}
+  ]
+  for (i=0;i<conversion.length;i++) {
+    expect(conversionsController.arabicRoman(conversion[i])).to.equal(conversion[i].answer);
+  }
+});
+
+
+
+
