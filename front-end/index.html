@@ -23,20 +23,16 @@
 <h3>RECENT CONVERSIONS</h3>
 <table>
   <tr>
-    <th>From</th>
-    <th>To</th> 
     <th>Date</th>
+    <th>From</th> 
+    <th>To</th>
   </tr>
-  <tr ng-repeat="conversion in all.data | orderBy:'time':true">
-    <td>{{conversion.from}}</td>
-    <td>{{conversion.to}}</td> 
-    <td>{{conversion.time}}</td>
+  <tr ng-repeat="conversion in all.data | orderBy:'time':false">
+     <td>{{conversion.time}}</td>
+    <td>{{conversion.to}}</td>
+    <td>{{conversion.from}}</td> 
   </tr>
 </table>
 
-<!-- <div ng-repeat="conversion in all">
-<p>{{conversion.from}}
-{{conversion.to}}, {{conversion.time}}</p>
-</div> -->
 </body>
 </html>

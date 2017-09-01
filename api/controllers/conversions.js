@@ -46,7 +46,9 @@ function createConversion(request, response) {
     romanArabic(conversion)
 }
   conversion.to = converted;
-  conversion.time = new Date(parseInt(conversion._id.toString().substring(0, 8), 16) * 1000);
+  conversion.time = new Date(parseInt(conversion._id.toString().substring(0, 1), 16) * 1000);
+  conversion.timeArr = conversion.time.split(' ')
+  conversion.time = conversion.timeArr[0]+' '+conversion.timeArr[2]+' '+ conversion.timeArr[1]+' '+conversion.timeArr[3];
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
     response.status(201).send(conversion);
