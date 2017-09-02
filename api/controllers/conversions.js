@@ -11,10 +11,11 @@ getAll = (request, response)=> {
 
 arabicRoman = (conversion) => {
   roman = '';
+  var from = conversion.from;
   for ( i in lookup ) {
-    while ( conversion.from >= lookup[i] ) {
+    while ( from >= lookup[i] ) {
        roman += i;
-      conversion.from -= lookup[i];
+      from -= lookup[i];
     }
   }
   converted = roman;
@@ -36,14 +37,29 @@ romanArabic = (conversion) => {
   return converted;
 }
 
+checkConversion = (request, response, conversion) => {
+  Conversion.findOne({from:conversion.from}, function(err, result){
+    if (result) {
+      console.log('here')
+     response.status(200).send(result);
+    } else {
+      saveConversion(conversion, request, response);
+    }
+  });
+}
+
 // POST
 createConversion = (request, response) => {
   let conversion = new Conversion(request.body);
-  if(Number(conversion.from)) {
+  checkConversion(request, response, conversion);
+}
+
+saveConversion = (conversion, request, response) => {
+    if(Number(conversion.from)) {
     arabicRoman(conversion);
   } else {
     romanArabic(conversion)
-}
+  }
   conversion.to = converted;
   conversion.date = new Date(parseInt(conversion._id.toString().substring(0, 8), 16) * 1000);
   conversion.dateArr = conversion.date.split(' ')
@@ -53,6 +69,7 @@ createConversion = (request, response) => {
     response.status(201).send(conversion);
   });
 }
+
 
 module.exports = {
   getAll: getAll,
