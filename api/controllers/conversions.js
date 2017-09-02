@@ -7,7 +7,14 @@ getAll = (request, response)=> {
     if(error) response.status(404).send(error);
     response.status(200).send(conversions);
   }).select('-__v');
-}
+};
+
+//POST
+createConversion = (request, response) => {
+  let conversion = new Conversion(request.body);
+  checkConversion(request, response, conversion);
+};
+
 
 arabicRoman = (conversion) => {
   roman = '';
@@ -37,24 +44,18 @@ romanArabic = (conversion) => {
 }
 
 checkConversion = (request, response, conversion) => {
-  Conversion.findOne({from:conversion.from}, function(err, result){
+  Conversion.findOne({$or: [{
+            "from":conversion.from
+        }, {
+            "to":conversion.from
+        }]}, function(err, result){
     console.log('here')
     if (result) {
-      console.log(result)
      response.status(200).send(result);
     } else {
       saveConversion(conversion, request, response);
     }
   });
-}
-
-// POST
-createConversion = (request, response) => {
-  let conversion = new Conversion(request.body);
-  if(!Number(conversion.from)) {
-    conversion.from = conversion.from.toUpperCase();  
-  }
-  checkConversion(request, response, conversion);
 }
 
 saveConversion = (conversion, request, response) => {

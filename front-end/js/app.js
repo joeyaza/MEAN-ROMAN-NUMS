@@ -20,12 +20,22 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 	$scope.submit = function() {
 		if(/^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/i.test($scope.from) || /^\d+$/i.test($scope.from)) {
 			$scope.error = '';
+			  if(!Number($scope.from)) {
+   				 $scope.from = $scope.from.toUpperCase();  
+ 			 }
 			conversionData = $scope.from;
 			$http.post("http://localhost:3001/conversions", 
 				{from:conversionData}, 
 				{headers: {'Content-Type': 'application/json'} })
 		        .then(function (response) {
-		    	$scope.answer = response.data.to;
+		        	console.log(response.data.to, $scope.from)
+		        	if (response.data.to===$scope.from) {
+		        		console.log('top')
+		        		$scope.answer = response.data.from;
+		        	} else {
+		        		console.log('bottom')
+		        		$scope.answer = response.data.to;
+		        	}
 		    });
 		} else {
 			$scope.error = 'Please enter a valid roman numeral or number!!';
@@ -33,4 +43,9 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 			return;
 		}
 	};
+	$scope.deleteAll = function() {
+		$http.delete("http://localhost:3001/conversions").then(function(response){
+				console.log(response)
+		});
+	}
 }]);
