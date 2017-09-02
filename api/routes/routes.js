@@ -9,5 +9,7 @@ router.route('/conversions')
   //GET all conversions
   .get(conversionsController.getAll)
   //POST a new Conversion
-  .post(conversionsController.createConversion);
+  .post(conversionsController.createConversion)
+  //DELETE all Conversions
+  .delete(conversionsController.deleteConversions)
 module.exports = router

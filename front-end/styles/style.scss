@@ -50,15 +50,12 @@ table {
 }
 
 
-/* ----------- Mobile ----------- */
-
-/* Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
-
-
+button {
+	background: white;
+	padding: 10px 15px;
+	border: black 1px solid;
+	border-radius: 10px;
+	margin-bottom: 30px;
 }
 
 @media (min-width:320px)  { 

@@ -6,7 +6,6 @@ app.factory('GetAllFactory', ['$http', function($http) {
 	 	data: []
 	 }
 	 GetAllFactory.getData = function()  {
-	 	if (GetAllFactory.data.length) return;
 	 	return $http.get('http://localhost:3001/conversions').success(function(res){
 			GetAllFactory.data=res;
 		});
@@ -27,16 +26,18 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 			$http.post("http://localhost:3001/conversions", 
 				{from:conversionData}, 
 				{headers: {'Content-Type': 'application/json'} })
-		        .then(function (response) {
-		        	console.log(response.data.to, $scope.from)
-		        	if (response.data.to===$scope.from) {
-		        		console.log('top')
-		        		$scope.answer = response.data.from;
-		        	} else {
-		        		console.log('bottom')
-		        		$scope.answer = response.data.to;
-		        	}
-		    });
+	        .then(function (response) {
+	        	console.log(response.data.to, $scope.from)
+	        	if (response.data.to===$scope.from) {
+	        		console.log('top')
+	        		$scope.answer = response.data.from;
+	        	} else {
+	        		console.log('bottom')
+	        		$scope.answer = response.data.to;
+	        	}
+        		GetAllFactory.getData();
+				$scope.all=GetAllFactory;
+	    	});
 		} else {
 			$scope.error = 'Please enter a valid roman numeral or number!!';
 			$scope.answer = '';
@@ -45,7 +46,13 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 	};
 	$scope.deleteAll = function() {
 		$http.delete("http://localhost:3001/conversions").then(function(response){
-				console.log(response)
+			console.log(response)
+			if(response.status===200 && response.data.n === 0 ) {
+					$scope.error = 'Nothing to delete!!';
+			} else if(response.status===200 ) {
+				$scope.error = 'All deleted!!';
+				$scope.all='';
+			} else $scope.error = 'Sorry, could not delete - please try again!!';
 		});
 	}
 }]);

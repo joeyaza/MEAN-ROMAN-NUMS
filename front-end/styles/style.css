@@ -38,8 +38,13 @@ table {
 .text-left {
   text-align: left; }
 
-/* ----------- Mobile ----------- */
-/* Portrait and Landscape */
+button {
+  background: white;
+  padding: 10px 15px;
+  border: black 1px solid;
+  border-radius: 10px;
+  margin-bottom: 30px; }
+
 @media (min-width: 320px) {
   .converter {
     width: 100%; }

@@ -15,7 +15,6 @@ createConversion = (request, response) => {
   checkConversion(request, response, conversion);
 };
 
-
 arabicRoman = (conversion) => {
   roman = '';
   var from = conversion.from;
@@ -74,10 +73,18 @@ saveConversion = (conversion, request, response) => {
   });
 }
 
+//DELETE
+deleteConversions = (request,response) => {
+  Conversion.remove(function(error,conversions){
+    if(error) response.status(404).send(error);
+    response.status(200).send(conversions);
+  });
+}
+
+
 
 module.exports = {
   getAll: getAll,
   createConversion: createConversion,
-  romanArabic: romanArabic,
-  arabicRoman: arabicRoman
+  deleteConversions: deleteConversions
 }
