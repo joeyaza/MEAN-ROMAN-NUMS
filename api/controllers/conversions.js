@@ -75,7 +75,7 @@ saveConversion = (conversion, request, response) => {
 
 //DELETE
 deleteConversions = (request,response) => {
-  Conversion.remove(function(error,conversions){
+  conversion.remove(function(error,conversions){
     if(error) response.status(404).send(error);
     response.status(200).send(conversions);
   });
@@ -86,5 +86,7 @@ deleteConversions = (request,response) => {
 module.exports = {
   getAll: getAll,
   createConversion: createConversion,
-  deleteConversions: deleteConversions
+  deleteConversions: deleteConversions,
+  arabicRoman:arabicRoman,
+  romanArabic:romanArabic
 }

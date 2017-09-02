@@ -24,13 +24,13 @@ describe('/GET Conversions', () => {
 describe('/POST conversion', () => {
   it('it should POST a conversion and do the correct conversion from Roman Numeral to Number ', (done) => {
     let conversion = {
-        from: "x"
+        from: "X"
     }
     chai.request(server)
     .post('/conversions')
     .send(conversion)
     .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.should.have.property('to').eql('10');
       done();
@@ -38,12 +38,20 @@ describe('/POST conversion', () => {
   });
 });
 
+describe('/DELETE conversions', () => {
+  it('Should delete all conversions ', (done) => {
+    chai.request(server)
+    .delete('/conversions')
+    done();
+  });
+});
+
 it('Conversion should return correct Arabic Number for Roman Numeral', function() {
   conversion = [
-    {from: 'v', answer: 5},
-    {from: 'mv', answer: 1005},
-    {from: 'mmx', answer: 2010},
-    {from: 'xc', answer: 90}
+    {from: 'V', answer: 5},
+    {from: 'MV', answer: 1005},
+    {from: 'MMX', answer: 2010},
+    {from: 'XC', answer: 90}
   ]
   for (i=0;i<conversion.length;i++) {
     expect(conversionsController.romanArabic(conversion[i])).to.equal(conversion[i].answer);
