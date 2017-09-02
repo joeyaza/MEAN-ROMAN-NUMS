@@ -22,8 +22,7 @@ arabicRoman = (conversion) => {
   return converted;
 }
 
-romanArabic = (conversion) => {
-  conversion.from = conversion.from.toUpperCase();    
+romanArabic = (conversion) => {  
   arabic = 0,
   i = conversion.from.length;
   while (i--) {
@@ -39,8 +38,9 @@ romanArabic = (conversion) => {
 
 checkConversion = (request, response, conversion) => {
   Conversion.findOne({from:conversion.from}, function(err, result){
+    console.log('here')
     if (result) {
-      console.log('here')
+      console.log(result)
      response.status(200).send(result);
     } else {
       saveConversion(conversion, request, response);
@@ -51,11 +51,14 @@ checkConversion = (request, response, conversion) => {
 // POST
 createConversion = (request, response) => {
   let conversion = new Conversion(request.body);
+  if(!Number(conversion.from)) {
+    conversion.from = conversion.from.toUpperCase();  
+  }
   checkConversion(request, response, conversion);
 }
 
 saveConversion = (conversion, request, response) => {
-    if(Number(conversion.from)) {
+  if(Number(conversion.from)) {
     arabicRoman(conversion);
   } else {
     romanArabic(conversion)
