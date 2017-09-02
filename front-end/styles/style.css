@@ -6,7 +6,6 @@ body {
 
 .converter {
   border-radius: 15px;
-  width: 600px;
   margin: 0 auto;
   padding: 30px;
   background: white;
@@ -29,10 +28,26 @@ body {
     text-transform: uppercase; }
 
 table {
-  width: 650px;
   margin: 0 auto;
   background: white;
   padding: 20px;
   border-radius: 15px; }
   table th {
     text-decoration: underline; }
+
+.text-left {
+  text-align: left; }
+
+/* ----------- Mobile ----------- */
+/* Portrait and Landscape */
+@media (min-width: 320px) {
+  .converter {
+    width: 100%; }
+  table {
+    width: 100%; } }
+
+@media (min-width: 801px) {
+  .converter {
+    width: 600px; }
+  table {
+    width: 600px; } }

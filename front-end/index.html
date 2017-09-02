@@ -23,12 +23,12 @@
 <h3>RECENT CONVERSIONS</h3>
 <table>
   <tr>
-    <th>Date</th>
+    <th class="text-left">Date</th>
     <th>From</th> 
     <th>To</th>
   </tr>
   <tr ng-repeat="conversion in all.data | orderBy:'time':false">
-     <td>{{conversion.time}}</td>
+    <td class="text-left">{{conversion.date}}</td>
     <td>{{conversion.to}}</td>
     <td>{{conversion.from}}</td> 
   </tr>

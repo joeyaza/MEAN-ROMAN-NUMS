@@ -2,14 +2,14 @@ let Conversion = require('../models/Conversion');
 let lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},roman = '',i;
 
 // GET
-function getAll(request, response) {
+getAll = (request, response)=> {
   Conversion.find(function(error, conversions) {
     if(error) response.status(404).send(error);
     response.status(200).send(conversions);
   }).select('-__v');
 }
 
-function arabicRoman(conversion) {
+arabicRoman = (conversion) => {
   roman = '';
   for ( i in lookup ) {
     while ( conversion.from >= lookup[i] ) {
@@ -21,7 +21,7 @@ function arabicRoman(conversion) {
   return converted;
 }
 
-function romanArabic(conversion) {
+romanArabic = (conversion) => {
   conversion.from = conversion.from.toUpperCase();    
   arabic = 0,
   i = conversion.from.length;
@@ -36,9 +36,8 @@ function romanArabic(conversion) {
   return converted;
 }
 
-
 // POST
-function createConversion(request, response) {
+createConversion = (request, response) => {
   let conversion = new Conversion(request.body);
   if(Number(conversion.from)) {
     arabicRoman(conversion);
@@ -46,9 +45,9 @@ function createConversion(request, response) {
     romanArabic(conversion)
 }
   conversion.to = converted;
-  conversion.time = new Date(parseInt(conversion._id.toString().substring(0, 1), 16) * 1000);
-  conversion.timeArr = conversion.time.split(' ')
-  conversion.time = conversion.timeArr[0]+' '+conversion.timeArr[2]+' '+ conversion.timeArr[1]+' '+conversion.timeArr[3];
+  conversion.date = new Date(parseInt(conversion._id.toString().substring(0, 8), 16) * 1000);
+  conversion.dateArr = conversion.date.split(' ')
+  conversion.date = conversion.dateArr[0]+' '+conversion.dateArr[2]+' '+ conversion.dateArr[1]+' '+conversion.dateArr[3];
   conversion.save(function(error) {
     if(error) response.status(500).send(error);
     response.status(201).send(conversion);

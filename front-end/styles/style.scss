@@ -7,7 +7,6 @@ background: #F8F8F8;
 
 .converter {
 	border-radius: 15px;
-	width : 600px;
 	margin: 0 auto;
 	padding: 30px;
 	background: white;
@@ -36,9 +35,7 @@ background: #F8F8F8;
 	}
 }
 
-
 table {
-    width: 650px;
     margin: 0 auto;
     background: white;
     padding: 20px;
@@ -47,3 +44,43 @@ table {
     	text-decoration: underline;
     }
 }
+
+.text-left {
+	text-align: left;
+}
+
+
+/* ----------- Mobile ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+
+}
+
+@media (min-width:320px)  { 
+
+.converter {
+	width: 100%;
+}
+
+table {
+	width: 100%;
+}
+
+}
+
+@media (min-width:801px)  { 
+
+.converter {
+	width: 600px;
+}
+
+table {
+	width: 600px;
+}
+
+ }
