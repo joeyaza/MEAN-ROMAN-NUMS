@@ -43,12 +43,7 @@ romanArabic = (conversion) => {
 }
 
 checkConversion = (request, response, conversion) => {
-  Conversion.findOne({$or: [{
-            "from":conversion.from
-        }, {
-            "to":conversion.from
-        }]}, function(err, result){
-    console.log('here')
+  Conversion.findOne({"from":conversion.from}, function(err, result){
     if (result) {
      response.status(200).send(result);
     } else {

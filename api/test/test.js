@@ -9,6 +9,7 @@ let conversionsController = require('../controllers/conversions');
 let should = chai.should();
 chai.use(chaiHttp);
 
+
 describe('/GET Conversions', () => {
   it('it should GET all the conversions', (done) => {
     chai.request(server)
@@ -30,7 +31,7 @@ describe('/POST conversion', () => {
     .post('/conversions')
     .send(conversion)
     .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(201) ;
         res.body.should.be.a('object');
         res.body.should.have.property('to').eql('10');
       done();
@@ -42,7 +43,10 @@ describe('/DELETE conversions', () => {
   it('Should delete all conversions ', (done) => {
     chai.request(server)
     .delete('/conversions')
-    done();
+    .end((err, res) => {
+        res.should.have.status(200);
+      done();
+    });
   });
 });
 
@@ -69,7 +73,3 @@ it('Conversion should return correct Roman Numeral for Arabic Number', function(
     expect(conversionsController.arabicRoman(conversion[i])).to.equal(conversion[i].answer);
   }
 });
-
-
-
-

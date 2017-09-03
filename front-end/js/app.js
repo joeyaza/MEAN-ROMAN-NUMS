@@ -43,7 +43,6 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 	};
 	$scope.deleteAll = function() {
 		$http.delete("http://localhost:3001/conversions").then(function(response){
-			console.log(response)
 			if(response.status===200 && response.data.n === 0 ) {
 					$scope.error = 'Nothing to delete!!';
 			} else if(response.status===200 ) {
