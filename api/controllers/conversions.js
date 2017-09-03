@@ -1,5 +1,5 @@
 let Conversion = require('../models/Conversion');
-let lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},roman = '',i;
+let romanNumeralConverter = require('roman-numeral-converter-mmxvi');
 
 // GET
 getAll = (request, response)=> {
@@ -16,30 +16,11 @@ createConversion = (request, response) => {
 };
 
 arabicRoman = (conversion) => {
-  roman = '';
-  var from = conversion.from;
-  for ( i in lookup ) {
-    while ( from >= lookup[i] ) {
-       roman += i;
-      from -= lookup[i];
-    }
-  }
-  converted = roman;
-  return converted;
+  converted = romanNumeralConverter.getRomanFromInteger(conversion.from);
 }
 
 romanArabic = (conversion) => {  
-  arabic = 0,
-  i = conversion.from.length;
-  while (i--) {
-      if ( lookup[conversion.from[i]] < lookup[conversion.from[i+1]] )
-        arabic -= lookup[conversion.from[i]];
-      else
-        arabic += lookup[conversion.from[i]];
-  }
-  converted = arabic;
-  arabic = 0;
-  return converted;
+  converted = romanNumeralConverter.getIntegerFromRoman(conversion.from);
 }
 
 checkConversion = (request, response, conversion) => {
@@ -77,11 +58,9 @@ deleteConversions = (request,response) => {
 }
 
 
-
 module.exports = {
   getAll: getAll,
   createConversion: createConversion,
   deleteConversions: deleteConversions,
-  arabicRoman:arabicRoman,
-  romanArabic:romanArabic
+  romanNumeralConverter: romanNumeralConverter
 }

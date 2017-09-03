@@ -6,6 +6,7 @@ let expect = chai.expect;
 let chaiHttp = require('chai-http');
 let server = require('../app');
 let conversionsController = require('../controllers/conversions');
+let romanNumeralConverter = require('roman-numeral-converter-mmxvi');
 let should = chai.should();
 chai.use(chaiHttp);
 
@@ -50,6 +51,7 @@ describe('/DELETE conversions', () => {
   });
 });
 
+
 it('Conversion should return correct Arabic Number for Roman Numeral', function() {
   conversion = [
     {from: 'V', answer: 5},
@@ -58,7 +60,7 @@ it('Conversion should return correct Arabic Number for Roman Numeral', function(
     {from: 'XC', answer: 90}
   ]
   for (i=0;i<conversion.length;i++) {
-    expect(conversionsController.romanArabic(conversion[i])).to.equal(conversion[i].answer);
+    expect(romanNumeralConverter.getIntegerFromRoman(conversion[i].from)).to.equal(conversion[i].answer);
   }
 });
 
@@ -70,6 +72,6 @@ it('Conversion should return correct Roman Numeral for Arabic Number', function(
     {from: 100, answer: 'C'}
   ]
   for (i=0;i<conversion.length;i++) {
-    expect(conversionsController.arabicRoman(conversion[i])).to.equal(conversion[i].answer);
+    expect(romanNumeralConverter.getRomanFromInteger(conversion[i].from)).to.equal(conversion[i].answer);
   }
 });
