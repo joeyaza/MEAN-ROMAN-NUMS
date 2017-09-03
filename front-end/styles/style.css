@@ -20,6 +20,13 @@ body {
   .converter form input[type="text"] {
     margin-right: 20px;
     width: 200px; }
+    .converter form input[type="text"]:active {
+      background: #F0F8FF; }
+  .converter form input[type="submit"] {
+    cursor: pointer; }
+    .converter form input[type="submit"]:hover {
+      background: black;
+      color: white; }
   .converter form .error {
     padding: 15px;
     border-radius: 15px;
@@ -43,7 +50,11 @@ button {
   padding: 10px 15px;
   border: black 1px solid;
   border-radius: 10px;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  cursor: pointer; }
+  button:hover {
+    background: black;
+    color: white; }
 
 .blue {
   color: blue; }
