@@ -27,11 +27,7 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 				{from:conversionData}, 
 				{headers: {'Content-Type': 'application/json'} })
 	        .then(function (response) {
-	        	if (response.data.to===$scope.from) {
-	        		$scope.answer = response.data.from;
-	        	} else {
-	        		$scope.answer = response.data.to;
-	        	}
+	        	$scope.answer = response.data.to;
         		GetAllFactory.getData();
 				$scope.all=GetAllFactory;
 	    	});
