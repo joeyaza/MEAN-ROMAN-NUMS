@@ -1,6 +1,5 @@
 process.env.NODE_ENV = 'test';
 let mongoose = require("mongoose");
-let Conversion = require('../controllers/conversions');
 let chai = require('chai');
 let expect = chai.expect;
 let chaiHttp = require('chai-http');
