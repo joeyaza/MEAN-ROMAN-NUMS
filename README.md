@@ -8,7 +8,7 @@ Unit tests using Mocha/Chai. Some basic styling using scss and Gulp for task run
 
 git clone this directory, NPM install on both front end and back end.
 
-Then serve backend on localhost:3001 using npm or nodemon.
+Then serve backend on localhost:3001 using npm start or nodemon.
 
-Serve frontend and navigate to that localhost. (such as python -m SimpleHTTPServer 4000 )
+Serve frontend and navigate to that localhost. (such as python -m SimpleHTTPServer 4000 ).
 
