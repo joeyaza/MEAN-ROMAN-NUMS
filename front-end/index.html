@@ -29,7 +29,7 @@
     <th>From</th> 
     <th>To</th>
   </tr>
-  <tr ng-repeat="conversion in all.data | orderBy:'time':false">
+  <tr ng-repeat="conversion in all.data | limitTo:10">
     <td class="text-left">{{conversion.date}}</td>
     <td>{{conversion.from}}</td>
     <td>{{conversion.to}}</td> 
