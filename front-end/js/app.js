@@ -17,7 +17,7 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 	GetAllFactory.getData();
 	$scope.all=GetAllFactory;
 	$scope.submit = function() {
-		if(/^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/i.test($scope.from) || /^\d+$/i.test($scope.from)) {
+		if(/^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/i.test($scope.from) || /^[1-9]\d*$/i.test($scope.from)) {
 			$scope.error = '';
 			  if(!Number($scope.from)) {
    				 $scope.from = $scope.from.toUpperCase();  
@@ -48,7 +48,8 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 					$scope.error = 'Nothing to delete!!';
 			} else if(response.status===200 ) {
 				$scope.error = 'All deleted!!';
-				$scope.all='';
+				GetAllFactory.getData();
+				$scope.all=GetAllFactory;
 			} else $scope.error = 'Sorry, could not delete - please try again!!';
 		});
 	}
