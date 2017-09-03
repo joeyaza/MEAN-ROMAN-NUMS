@@ -45,6 +45,9 @@ button {
   border-radius: 10px;
   margin-bottom: 30px; }
 
+.blue {
+  color: blue; }
+
 @media (min-width: 320px) {
   .converter {
     width: 100%; }

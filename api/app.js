@@ -1,7 +1,5 @@
 const express = require('express');
-const path = require('path');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
 const cors = require('cors');
@@ -20,7 +18,6 @@ app.use(cors({
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(routes);
 
 app.listen(process.env.PORT || 3001);

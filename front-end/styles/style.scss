@@ -58,26 +58,30 @@ button {
 	margin-bottom: 30px;
 }
 
+.blue {
+	color: blue;
+}
+
 @media (min-width:320px)  { 
 
-.converter {
-	width: 100%;
-}
+	.converter {
+		width: 100%;
+	}
 
-table {
-	width: 100%;
-}
+	table {
+		width: 100%;
+	}
 
 }
 
 @media (min-width:801px)  { 
 
-.converter {
-	width: 600px;
-}
+	.converter {
+		width: 600px;
+	}
 
-table {
-	width: 600px;
-}
+	table {
+		width: 600px;
+	}
 
- }
+}
