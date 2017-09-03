@@ -17,6 +17,7 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 	GetAllFactory.getData();
 	$scope.all=GetAllFactory;
 	$scope.submit = () => {
+		// check if input is a roman numeral or number using RegEx
 		if(/^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/i.test($scope.from) || /^[1-9]\d*$/i.test($scope.from)) {
 			$scope.error = '';
 			  if(!Number($scope.from)) {
