@@ -14,7 +14,7 @@ describe('/POST conversion', () => {
   it('it should POST a conversion and do the correct conversion from Roman Numeral to Number ', (done) => {
     let conversion = {
         from: "X"
-    }
+    };
     chai.request(server)
     .post('/conversions')
     .send(conversion)
@@ -31,19 +31,18 @@ describe('/POST conversion', () => {
   });
 });
 
-
 describe('/GET Conversions', () => {
   it('it should GET all the conversions', (done) => {
     chai.request(server)
     .get('/conversions')
      .end((error, response) => {
-       response.status.should.equal(200)
-       response.body.should.be.a('array')
-       response.body[0].should.have.property('_id')
-       response.body[0].should.have.property('date')
-       response.body[0].should.have.property('to')
-       response.body[0].should.have.property('from')
-       done()
+       response.status.should.equal(200);
+       response.body.should.be.a('array');
+       response.body[0].should.have.property('_id');
+       response.body[0].should.have.property('date');
+       response.body[0].should.have.property('to');
+       response.body[0].should.have.property('from');
+       done();
      });
   });
 });

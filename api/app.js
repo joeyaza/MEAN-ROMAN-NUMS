@@ -21,6 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 
 app.listen(process.env.PORT || 3001);
-console.log("app is listening .....!")
+console.log("app is listening .....!");
 
 module.exports = app;

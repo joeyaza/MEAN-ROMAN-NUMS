@@ -11,7 +11,7 @@ app.factory('GetAllFactory', ['$http', function($http) {
 		});
 	 }
 	 return GetAllFactory;
-}])
+}]);
 
 app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $http, GetAllFactory) {
 	GetAllFactory.getData();
@@ -50,5 +50,5 @@ app.controller('Main', ['$scope', '$http', 'GetAllFactory', function ($scope, $h
 				$scope.all=GetAllFactory;
 			} else $scope.error = 'Sorry, could not delete - please try again!!';
 		});
-	}
+	};
 }]);

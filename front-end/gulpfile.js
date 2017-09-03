@@ -5,7 +5,7 @@ let sass = require('gulp-sass');
  
 gulp.task('sass', () => {
   return gulp.src('styles/style.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass().on('error', sass.logError));
     .pipe(gulp.dest('./styles'));
 });
  
