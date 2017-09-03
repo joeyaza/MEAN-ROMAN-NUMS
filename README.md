@@ -1,10 +1,10 @@
-## MEAN-ROMAN-NUMS
+# MEAN-ROMAN-NUMS
 
 A roman numeral to number (and vice versa) converter using Angular, Node/Express and Mongo.
 
 Unit tests using Mocha/Chai. Some basic styling using scss and Gulp for task running. 
 
-# To Use
+## To Use
 
 git clone this directory, NPM install on both front end and back end.
 
