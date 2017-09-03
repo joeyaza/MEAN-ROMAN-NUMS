@@ -52,7 +52,6 @@ saveConversion = (conversion, request, response) => {
 //DELETE
 deleteConversions = (request,response) => {
   Conversion.remove(function(error,conversions){
-    console.log(conversions)
     if(error) response.status(404).send(error);
     response.status(200).send(conversions);
   });

@@ -4,6 +4,9 @@ body {
   font-family: arial;
   background: #F8F8F8; }
 
+*:focus {
+  outline: 0; }
+
 .converter {
   border-radius: 15px;
   margin: 0 auto;
@@ -20,7 +23,7 @@ body {
   .converter form input[type="text"] {
     margin-right: 20px;
     width: 200px; }
-    .converter form input[type="text"]:active {
+    .converter form input[type="text"]:focus {
       background: #F0F8FF; }
   .converter form input[type="submit"] {
     cursor: pointer; }

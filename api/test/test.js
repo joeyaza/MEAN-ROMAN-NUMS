@@ -10,19 +10,6 @@ let romanNumeralConverter = require('roman-numeral-converter-mmxvi');
 let should = chai.should();
 chai.use(chaiHttp);
 
-
-describe('/GET Conversions', () => {
-  it('it should GET all the conversions', (done) => {
-    chai.request(server)
-    .get('/conversions')
-    .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('array');
-      done();
-    });
-  });
-});
-
 describe('/POST conversion', () => {
   it('it should POST a conversion and do the correct conversion from Roman Numeral to Number ', (done) => {
     let conversion = {
@@ -31,14 +18,36 @@ describe('/POST conversion', () => {
     chai.request(server)
     .post('/conversions')
     .send(conversion)
-    .end((err, res) => {
-        res.should.have.status(201) ;
-        res.body.should.be.a('object');
-        res.body.should.have.property('to').eql('10');
+     .end((error, response) => {
+        response.should.have.status(201);
+        response.body.should.be.a('object');
+        response.body.should.have.property('from');
+        response.body.should.have.property('to');
+        response.body.should.have.property('date');
+        response.body.should.have.property('from').eql('X');
+        response.body.should.have.property('to').eql('10');
       done();
-    });
+     });
   });
 });
+
+
+describe('/GET Conversions', () => {
+  it('it should GET all the conversions', (done) => {
+    chai.request(server)
+    .get('/conversions')
+     .end((error, response) => {
+       response.status.should.equal(200)
+       response.body.should.be.a('array')
+       response.body[0].should.have.property('_id')
+       response.body[0].should.have.property('date')
+       response.body[0].should.have.property('to')
+       response.body[0].should.have.property('from')
+       done()
+     });
+  });
+});
+
 
 describe('/DELETE conversions', () => {
   it('Should delete all conversions ', (done) => {
